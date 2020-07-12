@@ -4,10 +4,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Id;
 
 /*
  *Created by olga on 17.04.2020
@@ -16,14 +16,16 @@ import javax.persistence.Table;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "specialities")
-public class Speciality extends BaseEntity {
-    @Column(name = "description")
+@Document(collection = "speciality")
+public class Speciality{
+    @Id
+    private Long id;
+
     private String description;
 
     @Builder
     public Speciality(Long id, String description) {
-        super(id);
+        this.id = id;
         this.description = description;
     }
 }

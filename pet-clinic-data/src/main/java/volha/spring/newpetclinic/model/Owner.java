@@ -4,8 +4,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,19 +19,17 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "owners")
+@Document(collection = "persons")
+@TypeAlias("owner")
 public class Owner extends Person {
-    @Column(name = "address")
+
     private String address;
 
-    @Column(name = "city")
     private String city;
 
-    @Column(name = "telephone")
     private String telephone;
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "owner")
-//    @Cascade({SAVE_UPDATE})
+    @DBRef
     private Set<Pet> pets = new HashSet<>();
 
     @Builder
