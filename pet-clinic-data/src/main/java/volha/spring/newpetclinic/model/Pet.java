@@ -13,8 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  *Created by olga on 13.04.2020
@@ -41,10 +41,10 @@ public class Pet{
     private LocalDate birthDate;
 
     @DBRef
-    private Set<Visit> visits = new HashSet<>();
+    private List<Visit> visits = new ArrayList<>();
 
     @Builder
-    public Pet(Long id, String name, PetType petType, Owner owner, LocalDate birthDate, Set<Visit> visits) {
+    public Pet(Long id, String name, PetType petType, Owner owner, LocalDate birthDate, List<Visit> visits) {
         this.id = id;
         this.name = name;
         this.petType = petType;

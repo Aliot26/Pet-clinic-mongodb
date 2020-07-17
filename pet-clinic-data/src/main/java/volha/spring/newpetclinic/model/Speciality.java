@@ -4,10 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 /*
  *Created by olga on 17.04.2020
@@ -15,9 +13,9 @@ import javax.persistence.Id;
 @Setter
 @Getter
 @NoArgsConstructor
-@Entity
-@Document(collection = "speciality")
+//@Entity
 public class Speciality{
+
     @Id
     private Long id;
 
@@ -27,5 +25,13 @@ public class Speciality{
     public Speciality(Long id, String description) {
         this.id = id;
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Speciality{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

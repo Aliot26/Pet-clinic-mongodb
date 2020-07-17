@@ -6,8 +6,7 @@ import volha.spring.newpetclinic.model.PetType;
 import volha.spring.newpetclinic.repositories.PetTypeRepository;
 import volha.spring.newpetclinic.services.PetTypeService;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /*
  *Created by olga on 22.04.2020
@@ -22,10 +21,8 @@ public class PetTypeJpaService implements PetTypeService {
     }
 
     @Override
-    public Set<PetType> findAll() {
-        Set<PetType> petTypes = new HashSet<>();
-        petTypeRepository.findAll().forEach(petTypes::add);
-        return petTypes;
+    public List<PetType> findAll() {
+        return petTypeRepository.findAll();
     }
 
     @Override

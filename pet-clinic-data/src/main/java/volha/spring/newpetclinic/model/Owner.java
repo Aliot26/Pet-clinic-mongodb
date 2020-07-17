@@ -4,13 +4,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Entity;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Id;
+import java.util.List;
 
 /*
  *Created by olga on 13.04.2020
@@ -19,9 +18,14 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @Entity
-@Document(collection = "persons")
-@TypeAlias("owner")
-public class Owner extends Person {
+@Document(collection = "owner")
+public class Owner{
+    @Id
+    private Long id;
+
+    private String firstName;
+
+    private String lastName;
 
     private String address;
 
@@ -30,17 +34,17 @@ public class Owner extends Person {
     private String telephone;
 
     @DBRef
-    private Set<Pet> pets = new HashSet<>();
+    private List<Pet> pets;
 
     @Builder
-    public Owner(Long id, String firstName, String lastName, String address, String city, String telephone, Set<Pet> pets) {
-        super(id, firstName, lastName);
+    public Owner(Long id, String firstName, String lastName, String address, String city, String telephone, List<Pet> pets) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        if (pets != null) {
-            this.pets = pets;
-        }
+        if (pets != null) this.pets = pets;
     }
 
     /**

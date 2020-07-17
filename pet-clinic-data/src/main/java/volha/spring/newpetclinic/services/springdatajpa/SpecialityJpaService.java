@@ -6,8 +6,7 @@ import volha.spring.newpetclinic.model.Speciality;
 import volha.spring.newpetclinic.repositories.SpecialityRepository;
 import volha.spring.newpetclinic.services.SpecialityService;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /*
  *Created by olga on 22.04.2020
@@ -22,10 +21,8 @@ public class SpecialityJpaService implements SpecialityService {
     }
 
     @Override
-    public Set<Speciality> findAll() {
-        Set<Speciality> specialities = new HashSet<>();
-        specialityRepository.findAll().forEach(specialities::add);
-        return specialities;
+    public List<Speciality> findAll() {
+        return specialityRepository.findAll();
     }
 
     @Override

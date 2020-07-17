@@ -1,5 +1,6 @@
 package volha.spring.newpetclinic.services.springdatajpa;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import volha.spring.newpetclinic.model.Owner;
@@ -8,9 +9,7 @@ import volha.spring.newpetclinic.repositories.PetRepository;
 import volha.spring.newpetclinic.repositories.PetTypeRepository;
 import volha.spring.newpetclinic.services.OwnerService;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /*
  *Created by olga on 22.04.2020
@@ -22,6 +21,7 @@ public class OwnerJpaService implements OwnerService {
     private final PetRepository petRepository;
     private final PetTypeRepository petTypeRepository;
 
+    @Autowired
     public OwnerJpaService(OwnerRepository ownerRepository, PetRepository petRepository, PetTypeRepository petTypeRepository) {
         this.ownerRepository = ownerRepository;
         this.petRepository = petRepository;
@@ -39,10 +39,8 @@ public class OwnerJpaService implements OwnerService {
     }
 
     @Override
-    public Set<Owner> findAll() {
-        Set<Owner> owners = new HashSet<>();
-        ownerRepository.findAll().forEach(owners::add);
-        return owners;
+    public List<Owner> findAll() {
+        return ownerRepository.findAll();
     }
 
     @Override

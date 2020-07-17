@@ -4,6 +4,7 @@ package volha.spring.newpetclinic.controllers;
  *Created by olga on 16.04.2020
  */
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ public class OwnerController {
 
     private final OwnerService ownerService;
 
+    @Autowired
     public OwnerController(OwnerService ownerService) {
         this.ownerService = ownerService;
     }
