@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Entity;
@@ -33,7 +32,6 @@ public class Owner{
 
     private String telephone;
 
-    @DBRef
     private List<Pet> pets;
 
     @Builder
@@ -44,7 +42,7 @@ public class Owner{
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        if (pets != null) this.pets = pets;
+        this.pets = pets;
     }
 
     /**

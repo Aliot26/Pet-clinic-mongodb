@@ -26,7 +26,6 @@ public class Vet implements Serializable {
 
     private String lastName;
 
-
     private List<Speciality> specialities;
 
     @Builder

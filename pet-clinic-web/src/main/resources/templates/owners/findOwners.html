@@ -12,7 +12,8 @@
         <label class="col-sm-2 control-label">Last name </label>
         <div class="col-sm-10">
           <input class="form-control" th:field="*{lastName}" size="30"
-            maxlength="80" /> <span class="help-inline"><div
+            maxlength="80" /> <span class="help-inline">
+          <div
               th:if="${#fields.hasAnyErrors()}">
               <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Error</p>
             </div></span>
@@ -30,6 +31,29 @@
 
   <br />
   <a class="btn btn-default" th:href="@{/owners/new}">Add Owner</a>
+
+  <table id="vets" class="table table-striped">
+    <thead>
+    <tr>
+      <th style="width: 150px;">Name</th>
+      <th style="width: 200px;">Address</th>
+      <th>City</th>
+      <th style="width: 120px">Telephone</th>
+      <th>Pets</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="owner : ${selections}">
+      <td>
+        <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}"/></a>
+      </td>
+      <td th:text="${owner.address}"/>
+      <td th:text="${owner.city}"/>
+      <td th:text="${owner.telephone}"/>
+      <td th:if= "${owner.pets != null}" ><div th:each="pet : ${owner.pets}" th:text="${pet.name} + ' ' ">No data</div></td>
+    </tr>
+    </tbody>
+  </table>
 
 </body>
 </html>

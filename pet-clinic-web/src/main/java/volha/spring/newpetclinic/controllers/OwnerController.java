@@ -34,9 +34,13 @@ public class OwnerController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @RequestMapping({"/find"})
-    public String findOwners(Model model) {
-        model.addAttribute("owner", Owner.builder().build());
+    @GetMapping({"/find"})
+    public String findOwners(Owner owner, BindingResult result, Model model) {
+        List<Owner> listOwners = ownerService.findAll();
+        listOwners.stream().forEach(System.out::println);
+        Owner owner1 = listOwners.get(0);
+        System.out.println(owner1.getPets());
+        model.addAttribute("selections", listOwners);
         return "owners/findOwners";
     }
 
@@ -53,8 +57,9 @@ public class OwnerController {
             owner = results.get(0);
             return "redirect:/owners/" + owner.getId();
         } else {
+            results =  ownerService.findAll();
             model.addAttribute("selections", results);
-            return "owners/ownersList";
+            return "owners/findOwners";
         }
     }
 

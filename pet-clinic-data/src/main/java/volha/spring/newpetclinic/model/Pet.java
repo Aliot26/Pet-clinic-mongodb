@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -23,8 +21,8 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-@Document(collection = "pets")
-@TypeAlias("pet")
+//@Document(collection = "pets")
+//@TypeAlias("pet")
 public class Pet{
     @Id
     private Long id;
