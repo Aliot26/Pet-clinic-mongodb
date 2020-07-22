@@ -30,9 +30,6 @@ public class VetController {
         model.addAttribute("vets", vetService.findAll());
         List<Vet> vets =  vetService.findAll();
         vets.stream().forEach(System.out::println);
-        Vet vet1 = vets.get(0);
-        System.out.println(vet1.getId());
-        System.out.println(vet1.getNumberSpecialities());
         return "vets/index";
     }
 

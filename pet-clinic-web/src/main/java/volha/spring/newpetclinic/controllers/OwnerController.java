@@ -12,6 +12,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import volha.spring.newpetclinic.model.Owner;
+import volha.spring.newpetclinic.model.Pet;
+import volha.spring.newpetclinic.services.NextSequenceService;
 import volha.spring.newpetclinic.services.OwnerService;
 
 import javax.validation.Valid;
@@ -23,10 +25,12 @@ public class OwnerController {
     private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 
     private final OwnerService ownerService;
+    private final NextSequenceService nextSequenceService;
 
     @Autowired
-    public OwnerController(OwnerService ownerService) {
+    public OwnerController(OwnerService ownerService, NextSequenceService nextSequenceService) {
         this.ownerService = ownerService;
+        this.nextSequenceService = nextSequenceService;
     }
 
     @InitBinder
@@ -38,7 +42,9 @@ public class OwnerController {
     public String findOwners(Owner owner, BindingResult result, Model model) {
         List<Owner> listOwners = ownerService.findAll();
         listOwners.stream().forEach(System.out::println);
-        Owner owner1 = listOwners.get(0);
+        Owner owner1 = listOwners.get(1);
+        List<Pet> pets = owner1.getPets();
+        System.out.println(pets.get(0).getId());
         System.out.println(owner1.getPets());
         model.addAttribute("selections", listOwners);
         return "owners/findOwners";
@@ -65,6 +71,8 @@ public class OwnerController {
 
     @GetMapping("/{ownerId}")
     public ModelAndView showOwner(@PathVariable Long ownerId) {
+        System.out.println("++++++++++");
+        System.out.println(ownerId);
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
         mav.addObject(ownerService.findById(ownerId));
         return mav;
@@ -72,7 +80,11 @@ public class OwnerController {
 
     @GetMapping("/new")
     public String initCreationForm(Model model) {
-        model.addAttribute("owner", Owner.builder().build());
+        Owner owner = Owner.builder().id(nextSequenceService.getNextSequence("customSequence")).build();
+        System.out.println(owner.getId());
+        model.addAttribute("owner", owner);
+        String buttonName = "Add owner";
+        model.addAttribute("button_name", buttonName);
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
 
@@ -88,7 +100,10 @@ public class OwnerController {
 
     @GetMapping("/{ownerId}/edit")
     public String initOwnerUpdateForm(@PathVariable Long ownerId, Model model) {
-        model.addAttribute(ownerService.findById(ownerId));
+        Owner owner = ownerService.findById(ownerId);
+        model.addAttribute("owner", owner);
+        String buttonName = "Update owner";
+        model.addAttribute("button_name", buttonName);
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
 

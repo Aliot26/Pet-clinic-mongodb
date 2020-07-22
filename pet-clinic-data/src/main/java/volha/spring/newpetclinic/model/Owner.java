@@ -19,6 +19,7 @@ import java.util.List;
 @Entity
 @Document(collection = "owner")
 public class Owner{
+
     @Id
     private Long id;
 
