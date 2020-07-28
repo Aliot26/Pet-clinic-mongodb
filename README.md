@@ -1,6 +1,8 @@
-[![CircleCI](https://circleci.com/gh/Aliot26/new-pet-clinic.svg?style=svg)](https://circleci.com/gh/Aliot26/new-pet-clinic)
-
 # PetClinic
 
+PetClinic is an application to support workflows at the vet clinic. The application helps to manage an information about clients and their animals. Also it provides possibilities to make doctor appointments.
 
-Project from Udemy course 
+## Migration project Pet Clinic from MySQL to MongoDB.
+
+
+
